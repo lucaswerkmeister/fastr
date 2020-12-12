@@ -59,7 +59,7 @@ import com.oracle.truffle.r.runtime.data.RPromise;
  * {@link PromiseCheckHelperNode}.
  *
  */
-@RBuiltin(name = "switch", visibility = CUSTOM, kind = PRIMITIVE, parameterNames = {"EXPR", "..."}, nonEvalArgs = 1, behavior = COMPLEX)
+@RBuiltin(name = "switch", visibility = CUSTOM, kind = PRIMITIVE, parameterNames = {"..."}, nonEvalArgs = 1, behavior = COMPLEX)
 public abstract class Switch extends RBuiltinNode.Arg2 {
 
     @Child private PromiseCheckHelperNode promiseHelper = new PromiseCheckHelperNode();
@@ -77,7 +77,7 @@ public abstract class Switch extends RBuiltinNode.Arg2 {
         // @formatter:off
         Casts casts = new Casts(Switch.class);
         // first argument must be list or expression or vector of size 1, if it is not String, cast it to integer
-        casts.arg("EXPR").defaultError(RError.Message.EXPR_NOT_LENGTH_ONE).
+        casts.arg(0).defaultError(RError.Message.EXPR_NOT_LENGTH_ONE).
                 mustNotBeMissing(RError.Message.EXPR_MISSING).
                 returnIf(atomicIntegerValue().or(instanceOf(String.class)).or(instanceOf(RExpression.class))).
                 mustBe(abstractVectorValue()).boxPrimitive().mustBe(size(1)).

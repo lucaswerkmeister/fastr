@@ -67,6 +67,7 @@ public class TestBuiltin_switch extends TestBase {
         assertEval("f <- function(x){switch(\"aa\", aa = , ab = 42)};f(quote(f(1,2,))[[4]])");
         assertEval("f <- function(x){switch(\"aa\", aa = , ab = x)};f(quote(f(1,2,))[[4]])");
         assertEval("f <- function(x){switch(\"aa\", aa = x, ab = 42)};f(quote(f(1,2,))[[4]])");
+        assertEval("{switch('E', 'A'=65, 'E'=69, 'I'=73, 'O'=79, 'U'=85)}");
     }
 
     @Test
